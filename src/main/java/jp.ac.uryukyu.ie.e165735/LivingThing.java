@@ -42,10 +42,14 @@ public class LivingThing {
      * @param opponent 攻撃対象
      */
     public void attack(LivingThing opponent){
+        int crtHit = 1;//クリティカルヒット(ダメージ2倍)
         if(dead == false) {
-            int damage = (int) (Math.random() * getAttack());
-            System.out.printf("%sの攻撃！%sに%dのダメージを与えた！！\n", name, opponent.getName(), damage);
-            opponent.wounded(damage);
+            int damage = (int) (Math.random() * getAttack() * crtHit);
+            if(damage == 0) {
+                System.out.println(name + "の攻撃！...だが、" + opponent.getName() + "は攻撃を回避した！");
+            }else {
+                System.out.printf("%sの攻撃！%sに%dのダメージを与えた！！\n", name, opponent.getName(), damage);
+            }opponent.wounded(damage);
         }
     }
 
